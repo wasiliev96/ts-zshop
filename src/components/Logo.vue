@@ -1,7 +1,8 @@
 <template>
   <router-link :to="{name:'Home'}">
-    <div :style="{backgroundColor:bgColor}" class="logo flex items-center justify-center rounded-full">
-      <svg class="block" width="50" height="35" viewBox="0 0 50 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div :style="{backgroundColor:bgColor}"
+         class="logo flex items-center justify-center rounded-full">
+      <svg class="block" width="50" height="45" viewBox="0 0 50 35" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g :fill="iconColor">
           <g>
             <path
@@ -53,7 +54,7 @@ export default class Logo extends Vue {
   //background-color: theme('colors.main');
   width:  70px;
   height: 70px;
-
+  border-radius: 50%;
   svg {
 
     transform: translateY(-10%);

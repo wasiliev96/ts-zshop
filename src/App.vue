@@ -5,7 +5,7 @@
       <!--      <router-link to="/">Home</router-link>-->
       <!--      <router-link to="/about">About</router-link>-->
     </div>
-    <router-view/>
+    <router-view class="mt-3 mx-5"/>
     <NavigationBar></NavigationBar>
   </div>
 </template>

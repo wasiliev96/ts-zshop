@@ -12,3 +12,10 @@
 .color-main {
   color: var(--color_main);
 }
+
+body {
+  min-height:  100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+               "Helvetica Neue", sans-serif;;
+}
