@@ -1,5 +1,5 @@
 <template>
-  <h1>New Page</h1>
+  <h1>{{this.$route.name}}</h1>
 </template>
 
 

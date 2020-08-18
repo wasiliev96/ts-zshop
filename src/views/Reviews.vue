@@ -1,5 +1,5 @@
 <template>
-<h1>Reviews page</h1>
+<h1>{{this.$route.name}}</h1>
 </template>
 
 <style scoped>

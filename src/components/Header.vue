@@ -1,16 +1,16 @@
 <template>
   <header class="relative w-full h-20 bg-white">
     <nav class="flex justify-end h-full nav">
-      <Logo class="absolute bottom-0 left-0 logo"></Logo>
+      <Logo class="absolute bottom-0 left-0 logo" @click="activeMenuIndex=0"></Logo>
       <ul class="flex items-center justify-center pr-2 nav-main-list">
         <li v-for="(link, index) in navLinks" v-bind:key="index" @click="activeMenuIndex = index"
             :class="{'active':activeMenuIndex===index}"
             class="block h-full px-2 font-bold uppercase color-main">
-          <router-link class="h-full flex items-center"
+          <router-link class="flex items-center h-full"
                        :to="{name: link.component}"><span v-text="link.title"></span></router-link>
         </li>
         <li class="px-2 text-xs font-bold uppercase color-main">
-          <router-link to="/reviews" class="h-full flex items-center justify-center flex-col">
+          <router-link to="/reviews" class="flex flex-col items-center justify-center h-full">
             <svg class="mx-auto" width="18" height="15" viewBox="0 0 18 15" fill="var(--color_main)"
                  xmlns="http://www.w3.org/2000/svg">
               <path

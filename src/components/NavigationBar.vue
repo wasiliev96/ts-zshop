@@ -1,8 +1,8 @@
 <template>
   <div class="fixed bottom-0 flex justify-center w-full cursor-pointer navigation-bar-wrapper">
-    <div class="fixed top-0 left-0 z-10 w-full h-full navigation-bar-overlay" v-if="activeMenuIndex"
+    <div class="fixed top-0 left-0 z-10 w-full h-full navigation-bar-overlay" v-if="activeMenuIndex===1"
          @click="activeMenuIndex=0"></div>
-    <div class="z-20 flex flex-col max-w-md w-full rounded-t-lg navigation-bar">
+    <div class="z-20 flex flex-col w-full max-w-md rounded-t-lg navigation-bar">
       <div class="flex justify-center navigation-header">
         <button class="flex-grow pt-2 pl-6 pr-5 rounded-tl-lg category focus:outline-none"
                 :class="{'active shadow-md':activeMenuIndex===1}"
@@ -14,16 +14,18 @@
                 @click="activeMenuIndex=2">
           <IconHome></IconHome>
         </button>
-        <button class="flex-grow w-20 h-20 mx-1 bg-white shadow btn-cta focus:outline-none"
-                :class="{'active':activeMenuIndex===5, 'cta_collapsed':activeView!=='New'}"
-                @click="activeMenuIndex=5">
-          <IconCash></IconCash>
-        </button>
-        <button class="flex-grow w-20 h-20 mx-1 bg-white shadow btn-cta focus:outline-none"
-                :class="{'active':activeMenuIndex===6, 'cta_collapsed':activeView!=='Sale'}"
-                @click="activeMenuIndex=6">
-          <IconCart></IconCart>
-        </button>
+        <div class="relative w-20 h-20 mx-1 overflow-hidden bg-white shadow-inner btn-cta focus:outline-none"
+             :class="{ 'collapsed':ctaVisible}">
+
+          <button class="absolute top-0 left-0 h-full min-w-full"
+                  :class="{ 'cta_collapsed':activeView!=='New'}">
+            <IconCash></IconCash>
+          </button>
+          <button class="absolute top-0 left-0 w-full h-full"
+                  :class="{ 'cta_collapsed':activeView!=='Sale'}">
+            <IconCart></IconCart>
+          </button>
+        </div>
         <button class="flex-grow px-5 pt-1 category focus:outline-none"
                 :class="{'active':activeMenuIndex===3}"
                 @click="activeMenuIndex=3">
@@ -72,6 +74,10 @@ import IconCart from "@/components/icons/IconCart.vue";
 })
 export default class extends Vue {
   private activeMenuIndex = null;
+
+  get ctaVisible(): boolean {
+    return this.activeView !== 'New' && this.activeView !== 'Sale'
+  }
 
   private readonly menulinks: Array<object> = [
     {
@@ -153,13 +159,15 @@ export default class extends Vue {
 }
 
 .categories {
-  max-height: calc(100vh - 100px);
-  transition: max-height .3s ease-in-out;
+  max-height: calc(70vh - 100px);
+  transition: max-height .2s ease-out;
+
+  &.collapsed {
+    max-height:                 0;
+    transition-timing-function: ease-out;
+  }
 }
 
-.collapsed {
-  max-height: 0;
-}
 
 button svg {
   margin: auto;
@@ -171,10 +179,31 @@ button svg {
   max-height:    80px;
   transform:     translateY(-45%);
   opacity:       1;
-  transition:    all .2s ease-in-out;
+  transition:    all .15s ease-in-out;
+
+  &.collapsed {
+    max-width:                  0;
+    transition-timing-function: ease-out;
+    transform:                  translate(0) scale(0) !important;
+
+    button {
+      opacity: 0;
+    }
+  }
+
+  button {
+    transition: all .3s ease-in-out;
+    transform:  translate(0);
+
+    &.cta_collapsed {
+      transform: translateY(100%);
+      opacity:   0;
+    }
+  }
+
   overflow:      hidden;
-  @media screen and (max-width: 400px){
-    max-width: 60px;
+  @media screen and (max-width: 400px) {
+    max-width:  60px;
     max-height: 60px;
   }
 
@@ -186,11 +215,5 @@ button svg {
   }
 }
 
-.cta_collapsed {
-  max-width: 0;
-  opacity:   0;
-  padding:   0;
-  margin:    0;
-}
 
 </style>
