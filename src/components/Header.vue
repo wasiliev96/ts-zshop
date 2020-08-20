@@ -1,5 +1,5 @@
 <template>
-  <header class="relative w-full h-20 bg-white">
+  <header class="sticky top-0 z-50 w-full h-20 bg-white">
     <nav class="flex justify-end h-full nav">
       <Logo class="absolute bottom-0 left-0 logo" @click="activeMenuIndex=0"></Logo>
       <ul class="flex items-center justify-center pr-2 nav-main-list">
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator'
+import {Component, Vue} from 'vue-property-decorator'
 import Logo from "@/components/Logo.vue";
 
 @Component({
@@ -35,7 +35,7 @@ import Logo from "@/components/Logo.vue";
   }
 })
 export default class Header extends Vue {
-  private navLinks: Array<object> = [
+  private readonly navLinks: Array<object> = [
     {
       title: 'Новинки',
       component: 'New'
@@ -51,7 +51,6 @@ export default class Header extends Vue {
 
 <style scoped>
 header {
-  position : relative;
 }
 
 .logo {
@@ -67,9 +66,5 @@ header {
   left       : 0;
   transform  : translateY(100%);
   background : linear-gradient(180deg, rgba(150, 145, 255, 0.3) 0%, rgba(150, 145, 255, 0) 100%);
-}
-
-li.active {
-  box-shadow : inset 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 </style>

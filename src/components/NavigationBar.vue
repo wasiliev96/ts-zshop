@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 flex justify-center w-full cursor-pointer navigation-bar-wrapper">
+  <div class="fixed bottom-0 flex justify-center w-full cursor-pointer navigation-bar-wrapper z-50 ">
     <div class="fixed top-0 left-0 z-10 w-full h-full navigation-bar-overlay" v-if="activeMenuIndex===1"
          @click="activeMenuIndex=0"></div>
     <div class="z-20 flex flex-col w-full max-w-md rounded-t-lg navigation-bar">
@@ -38,11 +38,11 @@
         </button>
       </div>
       <transition name="fadeHeight">
-        <div class="z-20 max-h-full px-6 color-main categories" :class="{'collapsed':activeMenuIndex!==1}">
+        <div class="z-20 max-h-full px-2 color-main categories" :class="{'collapsed':activeMenuIndex!==1}">
           <p class="py-5 text-lg uppercase">Весь каталог</p>
           <hr class="color-main">
-          <ul class="menuList" style="columns:3;">
-            <li class="py-3 pl-0 pr-1 hover:shadow-inner focus:shadow-inner" v-for="item in menulinks"
+          <ul class="menuList" style="columns:3; column-gap: 0">
+            <li class="py-3 pl-2 hover:shadow-inner focus:shadow-inner" v-for="item in menulinks"
                 @click="activeMenuIndex = null">
               <router-link :to="{name:item.href}" v-text="item.title"></router-link>
             </li>
