@@ -4,12 +4,12 @@
          @click="activeMenuIndex=0"></div>
     <div class="z-20 flex flex-col w-full max-w-md rounded-t-lg navigation-bar">
       <div class="flex justify-center navigation-header">
-        <button class="flex-grow pt-2 pl-6 pr-5 rounded-tl-lg category focus:outline-none"
+        <button class="flex-grow pt-2 pl-4 pr-5 rounded-tl-lg category focus:outline-none"
                 :class="{'active shadow-md':activeMenuIndex===1}"
                 @click="activeMenuIndex=1">
           <IconHanger></IconHanger>
         </button>
-        <button class="flex-grow px-5 pt-1 category focus:outline-none"
+        <button class="flex-grow pl-3 pr-2 sm:px-5 pt-1 category focus:outline-none"
                 :class="{'active':activeMenuIndex===2}"
                 @click="activeMenuIndex=2">
           <IconHome></IconHome>
@@ -22,16 +22,16 @@
             <IconCash></IconCash>
           </button>
           <button class="absolute top-0 left-0 w-full h-full"
-                  :class="{ 'cta_collapsed':activeView!=='Sale'}">
+                  :class="{ 'cta_collapsed':activeView!=='DetailsStrip'}">
             <IconCart></IconCart>
           </button>
         </div>
-        <button class="flex-grow px-5 pt-1 category focus:outline-none"
+        <button class="flex-grow px-3 sm:px-5 pt-1 category focus:outline-none"
                 :class="{'active':activeMenuIndex===3}"
                 @click="activeMenuIndex=3">
           <IconBasket></IconBasket>
         </button>
-        <button class="flex-grow pt-4 pl-5 pr-6 rounded-tr-lg category focus:outline-none"
+        <button class="flex-grow pt-4 pl-5 pr-4 rounded-tr-lg category focus:outline-none"
                 :class="{'active':activeMenuIndex===4}"
                 @click="activeMenuIndex=4">
           <IconMenu></IconMenu>
@@ -76,7 +76,7 @@ export default class extends Vue {
   private activeMenuIndex = null;
 
   get ctaVisible(): boolean {
-    return this.activeView !== 'New' && this.activeView !== 'Sale'
+    return this.activeView !== 'New' && this.activeView !== 'Sale' && this.activeView !== 'DetailsStrip'
   }
 
   private readonly menulinks: Array<object> = [
@@ -180,6 +180,12 @@ button svg {
   transform:     translateY(-45%);
   opacity:       1;
   transition:    all .15s ease-in-out;
+  @media screen and (max-width: 600px){
+    max-width: 50px;
+    max-height: 50px;
+    &>svg{
+    }
+  }
 
   &.collapsed {
     max-width:                  0;

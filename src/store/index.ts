@@ -17,7 +17,7 @@ export default new Vuex.Store({
         loadData({
                      commit
                  }) {
-            axios.get('http://localhost:1337/sale-items').then((response: any) => {
+            axios.get('http://192.168.43.61:1337/sale-items').then((response: any) => {
                 // console.log(response.data, this)
                 commit('updatePosts', response.data)
             })

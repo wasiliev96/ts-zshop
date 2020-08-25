@@ -1,12 +1,18 @@
 <template>
-  <router-link :to="{name:'DetailsStrip', params:{id:item.id}}" class="relative flex" :id="item.id">
-    <img :src="'http://localhost:1337' + item.gallery[0].url" :alt="item.gallery[0].alternativeText">
-    <div
-        class="absolute top-0 left-0 w-full h-full opacity-75 card-overlay bg-main"
-        v-if="item.isSold">
+  <div>
+
+    <router-link v-if="!item.isSold" :to="{name:'DetailsStrip', params:{id:item.id}}" class="relative flex"
+                 :id="item.id">
+      <img :src="'http://localhost:1337' + item.gallery[0].url" :alt="item.gallery[0].alternativeText">
+    </router-link>
+    <div class="relative flex" v-else>
+      <img :src="'http://localhost:1337' + item.gallery[0].url" :alt="item.gallery[0].alternativeText">
+      <div
+          class="absolute top-0 left-0 w-full h-full opacity-75 card-overlay bg-main">
+      </div>
+      <span  class="absolute text-2xl font-bold text-white uppercase sold-text">Продано</span>
     </div>
-    <span v-if="item.isSold" class="absolute text-2xl font-bold text-white uppercase sold-text">Продано</span>
-  </router-link>
+  </div>
 </template>
 
 <script lang="ts">

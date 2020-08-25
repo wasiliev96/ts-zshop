@@ -26,8 +26,8 @@ export default class IconCart extends Vue {
   transform:scale(3)!important;
   stroke:none!important;
   fill: var(--color_main)!important;
-  @media screen and (max-width: 400px){
-  transform:scale(2)!important;
+  @media screen and (max-width: 600px){
+  transform:scale(1.75)!important;
   }
 }
 </style>
