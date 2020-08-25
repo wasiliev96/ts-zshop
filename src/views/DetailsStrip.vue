@@ -6,9 +6,12 @@
     <!--    </div>-->
     <!--    <agile :infinite="false">-->
     <!--    </agile>-->
-    <div class=" h-full border-2 card" v-for="item in this.$store.state.saleItems"
+    <div class=" h-full border-2 card"
+         v-for="item in this.$store.state.saleItems"
+         v-waypoint="{ active: true, callback: onWaypoint, options: intersectionOptions }"
          :id="item.id">
-      <div class="mx-auto card-inner relative">
+      <div class="mx-auto card-inner relative"
+      >
         <agile class="h-full horizontal-strip" centerMode
                :navButtons=false
                :dots=false
@@ -38,27 +41,22 @@ import {VueAgile} from 'vue-agile'
 })
 export default class extends Vue {
   private lastYScroll = window.scrollY;
-  private currentScreenID: number = 1;
+  private intersectionOptions = {
+    root: null,
+    threshold: [0.75, 0.75] // [0.25, 0.75] if you want a 25% offset!
+  } // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 
-  created() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  public handleScroll(event: any): void {
-    // Any code to be executed when the window is scrolled
-    let currentPosition = window.pageYOffset || document.documentElement.scrollTop;
-    // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-    if (currentPosition > this.lastYScroll) {
-      // downscroll code
-
-    } else {
-      // upscroll code
+  public onWaypoint({el, going, direction}) {
+    // going: in, out
+    // direction: top, right, bottom, left
+    if (going === this.$waypointMap.GOING_IN) {
+      // console.log('waypoint going in!')
+      console.log(`current card: ${el.id}`)
     }
-    this.lastYScroll = currentPosition <= 0 ? 0 : currentPosition; // For Mobile or negative scrolling
+
+    if (direction === this.$waypointMap.DIRECTION_TOP) {
+      // console.log('waypoint going top!')
+    }
   }
 }
 </script>
@@ -87,6 +85,6 @@ export default class extends Vue {
 .details-strip {
   height:           calc(100vh - 90px);
   scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+  overflow-y:       scroll;
 }
 </style>
